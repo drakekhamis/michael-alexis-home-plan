@@ -1,0 +1,766 @@
+<title>Michael's Home Plan</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: a scrolling deck. Slides alternate between a light ground and a deep-blue band.
+   Deal numbers live in a side drawer and drive every figure, chart and sentence. */
+:root{
+  --display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
+  --body:'Figtree','Segoe UI',system-ui,sans-serif;
+  --bg:#F2F5F7; --bg2:#E8EDF1; --card:#FFFFFF; --ink:#0E1B2B; --muted:#4A5A6B; --line:#D3DCE4;
+  --own:#008573; --own-text:#00695B; --rent:#C2410C; --rent-text:#B03A0A;
+  --down:#1E3A5F; --apprec:#8FD3C4;
+  --band:#0F2A3F; --band-card:#17364E; --band-ink:#EAF1F6; --band-muted:#B6C6D4; --band-line:#2A4A63;
+  --accent:#008573; --accent-ink:#FFFFFF; --flat:#8896A5; --warn-bg:#FFF1DC; --warn-ink:#6B3A05;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0B141D; --bg2:#0F1A25; --card:#14212E; --ink:#E6EDF3; --muted:#A5B4C2; --line:#263749;
+    --own:#22A08B; --own-text:#4FD1BA; --rent:#D96B2B; --rent-text:#F29A62;
+    --down:#5E8FC7; --apprec:#A5E0D3;
+    --band:#12293D; --band-card:#1A3850; --band-ink:#E6EDF3; --band-muted:#A9BCCB; --band-line:#2C4C66;
+    --accent:#22A08B; --accent-ink:#06151B; --flat:#7F8E9D; --warn-bg:#3A2A10; --warn-ink:#F5D9A8; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0B141D; --bg2:#0F1A25; --card:#14212E; --ink:#E6EDF3; --muted:#A5B4C2; --line:#263749;
+  --own:#22A08B; --own-text:#4FD1BA; --rent:#D96B2B; --rent-text:#F29A62;
+  --down:#5E8FC7; --apprec:#A5E0D3;
+  --band:#12293D; --band-card:#1A3850; --band-ink:#E6EDF3; --band-muted:#A9BCCB; --band-line:#2C4C66;
+  --accent:#22A08B; --accent-ink:#06151B; --flat:#7F8E9D; --warn-bg:#3A2A10; --warn-ink:#F5D9A8; color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3,p{margin:0}
+h1,h2,h3{font-family:var(--display);text-wrap:balance}
+h1{font-size:clamp(40px,6.6vw,84px);line-height:1.04;font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(30px,4.2vw,52px);line-height:1.08;font-weight:700;letter-spacing:-.015em}
+h3{font-size:clamp(20px,2.1vw,25px);line-height:1.2;font-weight:700}
+a{color:inherit}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--own-text)}
+.band .eyebrow{color:var(--band-muted)}
+.lead{font-size:clamp(19px,2vw,23px);color:var(--muted);max-width:62ch}
+.band .lead{color:var(--band-muted)}
+.rent-t{color:var(--rent-text)} .own-t{color:var(--own-text)}
+
+/* top bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar-in{max-width:1200px;margin:0 auto;padding:10px clamp(16px,4vw,48px);display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-size:17px;font-weight:700;margin-right:auto}
+.count{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+.hint{font-size:13px;color:var(--muted)}
+@media (max-width:640px){.hint{display:none}}
+.btn{font:600 15px var(--body);background:var(--accent);color:var(--accent-ink);border:0;border-radius:999px;padding:8px 16px;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn:focus-visible,input:focus-visible{outline:3px solid var(--own);outline-offset:2px}
+
+/* slides */
+.slide{padding-block:clamp(48px,7vw,96px);scroll-margin-top:60px}
+.slide.alt{background:var(--bg2)}
+.slide.band{background:var(--band);color:var(--band-ink)}
+.wrap{max-width:1200px;margin:0 auto;padding-inline:clamp(16px,4vw,48px);display:flex;flex-direction:column;gap:clamp(24px,3.5vw,40px)}
+.head{display:flex;flex-direction:column;gap:14px;max-width:900px}
+.foot{font-size:14px;color:var(--muted);max-width:92ch}
+.band .foot{color:var(--band-muted)}
+.foot a{text-decoration:underline}
+.grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr))}
+.grid>*{min-width:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:clamp(20px,2.4vw,30px);display:flex;flex-direction:column;gap:10px}
+.band .card{background:var(--band-card);border-color:var(--band-line)}
+.card p{color:var(--muted);font-size:17px}
+.band .card p{color:var(--band-muted)}
+.big{font-family:var(--display);font-weight:800;font-size:clamp(40px,5.4vw,70px);line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.card p.big{color:var(--ink);font-size:clamp(40px,5.4vw,70px)}
+.band .card p.big{color:var(--band-ink)}
+.card p.own-t{color:var(--own-text)} .card p.rent-t{color:var(--rent-text)}
+.band .card p.own-t{color:#7FE0CB}
+.tag{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.statement{font-family:var(--display);font-size:clamp(22px,2.5vw,31px);line-height:1.25;font-weight:600;max-width:36em;text-wrap:balance}
+.num{font-variant-numeric:tabular-nums}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{border:1px solid var(--line);border-radius:999px;padding:7px 16px;font-size:15px;font-weight:600;background:var(--card)}
+.meta{display:flex;gap:6px 28px;flex-wrap:wrap;font-size:15px;color:var(--muted)}
+.cover .wrap{gap:28px}
+.cover h1 span{color:var(--own-text)}
+
+/* charts */
+.chart-row{display:grid;gap:24px;grid-template-columns:minmax(0,1fr) minmax(220px,300px);align-items:start}
+@media (max-width:900px){.chart-row{grid-template-columns:minmax(0,1fr)}}
+.chart{padding:clamp(14px,2vw,22px)}
+.legend{display:flex;gap:8px 22px;flex-wrap:wrap;font-size:15px;color:var(--ink);padding-bottom:6px}
+.legend i{display:inline-block;width:14px;height:12px;border-radius:3px;margin-right:7px;vertical-align:-1px}
+.legend i.dash{background:none!important;border-top:3px dashed var(--own);height:0;vertical-align:3px}
+.chart-scroll{overflow-x:auto}
+.chart-wrap{position:relative;min-width:640px}
+.chart-wrap svg{display:block;width:100%;height:auto}
+.tick{font:13px var(--body);fill:var(--muted);font-variant-numeric:tabular-nums}
+.lbl{font:600 14px var(--body);fill:var(--ink);font-variant-numeric:tabular-nums}
+.ann{font:600 14px var(--body);fill:var(--ink)}
+.grid-l{stroke:var(--line);stroke-width:1}
+.axis-l{stroke:var(--flat);stroke-width:1.5}
+.tip{position:absolute;top:8px;z-index:3;background:var(--ink);color:var(--bg);border-radius:8px;padding:8px 12px;font-size:14px;line-height:1.45;pointer-events:none;white-space:nowrap;font-variant-numeric:tabular-nums}
+.side{display:flex;flex-direction:column;gap:20px}
+.side .k{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.side .v{font-family:var(--display);font-weight:800;font-size:clamp(26px,3vw,36px);line-height:1.1;font-variant-numeric:tabular-nums}
+.side p{color:var(--muted);font-size:16px}
+.side p.k,.side p.v{color:var(--ink)}
+.side p.k.own-t{color:var(--own-text)} .side p.k.rent-t{color:var(--rent-text)}
+
+/* tables */
+.tbl-wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:600px;font-variant-numeric:tabular-nums}
+th,td{padding:14px 16px;text-align:right;border-bottom:1px solid var(--line);font-size:clamp(16px,1.7vw,21px)}
+th:first-child,td:first-child{text-align:left}
+th{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+td small{display:block;font-size:13px;color:var(--muted);font-weight:500}
+tr.hl td{background:color-mix(in srgb,var(--own) 14%,transparent);font-weight:700}
+td.cash{font-weight:800;color:var(--own-text)}
+
+/* rates diagram */
+.eq-row{display:flex;flex-wrap:wrap;gap:12px;align-items:stretch}
+.eq-row .layer{flex:1 1 220px;min-width:0;background:var(--band-card);border:1px solid var(--band-line);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:8px}
+.eq-row .layer p{color:var(--band-muted);font-size:16px}
+.eq-row .op{align-self:center;font-family:var(--display);font-weight:800;font-size:34px;color:var(--band-muted);padding-inline:2px}
+.eq-row .layer.res{background:var(--own);border-color:var(--own);color:#fff}
+.eq-row .layer.res p{color:#fff}
+@media (max-width:700px){.eq-row .op{flex:1 1 100%;text-align:center}}
+
+/* flow */
+.flow{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch}
+.flow .st{flex:1 1 200px;min-width:0;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;font-weight:600;font-size:17px}
+.flow .ar{align-self:center;font-size:26px;color:var(--muted)}
+@media (max-width:700px){.flow .ar{flex:1 1 100%;text-align:center;transform:rotate(90deg)}}
+.bars{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.bar-track{height:14px;border-radius:7px;background:var(--bg2);overflow:hidden}
+.bar-fill{height:100%;background:var(--own);border-radius:7px}
+
+/* image */
+.shot{padding:clamp(10px,1.6vw,18px);align-items:center}
+.shot img{display:block;width:100%;height:auto;max-width:1100px;border-radius:8px}
+
+/* loan controls */
+.ctl{display:flex;flex-direction:column;gap:10px}
+.ctl label{font-size:15px;font-weight:600}
+.ctl input[type=range]{width:100%;accent-color:var(--own);height:32px}
+.scale{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.notice{background:var(--warn-bg);color:var(--warn-ink);border-radius:10px;padding:12px 16px;font-size:15px;line-height:1.45}
+.ladder{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr))}
+.rung{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;display:flex;flex-direction:column;gap:4px}
+.rung .y{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.rung .p{font-family:var(--display);font-weight:800;font-size:clamp(28px,3vw,38px);line-height:1.1;font-variant-numeric:tabular-nums}
+.rung .d{font-size:15px;color:var(--muted);font-variant-numeric:tabular-nums}
+.rung.best{border-color:var(--own);box-shadow:0 0 0 1px var(--own)}
+.facts{display:grid;gap:10px 28px;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))}
+.fact{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding-bottom:8px;font-variant-numeric:tabular-nums}
+.fact span:first-child{color:var(--muted)} .fact span:last-child{font-weight:700;text-align:right}
+
+/* people */
+.people{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.person{background:var(--band);color:var(--band-ink);border-radius:14px;padding:26px;display:flex;flex-direction:column;gap:6px}
+.person h3{font-size:28px}
+.person p{color:var(--band-ink);font-size:17px;overflow-wrap:anywhere}
+.person p.m{color:var(--band-muted);font-size:15px}
+.step-list{display:flex;flex-direction:column;gap:20px}
+
+/* drawer */
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(400px,100%);z-index:40;background:var(--card);border-left:1px solid var(--line);box-shadow:-12px 0 40px rgba(0,0,0,.18);padding:calc(20px + env(safe-area-inset-top,0px)) 22px calc(20px + env(safe-area-inset-bottom,0px));overflow-y:auto;display:flex;flex-direction:column;gap:16px}
+.drawer h3{font-size:22px}
+.small{font-size:14px;color:var(--muted)}
+.fields{display:grid;gap:12px;grid-template-columns:1fr 1fr}
+.field{display:flex;flex-direction:column;gap:4px;min-width:0}
+.field.wide{grid-column:1/-1}
+.field label{font-size:13px;color:var(--muted);font-weight:600}
+.inp{display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:8px;padding:0 10px;background:var(--bg)}
+.inp span{color:var(--muted);font-size:15px}
+.inp input{flex:1;min-width:0;width:100%;border:0;background:transparent;color:var(--ink);font:600 17px var(--body);padding:9px 0;font-variant-numeric:tabular-nums}
+.inp input:focus-visible{outline:none}
+.inp:focus-within{border-color:var(--own);box-shadow:0 0 0 2px var(--own)}
+.sum{background:var(--bg2);border-radius:10px;padding:12px 14px;font-size:15px;color:var(--ink);font-variant-numeric:tabular-nums}
+.row-btns{display:flex;gap:10px;flex-wrap:wrap}
+
+/* program toggle */
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--card)}
+.seg button{font:600 14px var(--body);border:0;background:transparent;color:var(--ink);padding:6px 14px;border-radius:999px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.seg button:focus-visible{outline:3px solid var(--own);outline-offset:2px}
+.showing{font-size:13px;color:var(--muted)}
+@media (max-width:520px){.showing{display:none}}
+
+/* program cards */
+.pgrid{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))}
+.pgrid>*{min-width:0}
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:clamp(20px,2.4vw,30px);display:flex;flex-direction:column;gap:14px}
+.pcard h3{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline}
+.pcard h3 small{font:600 14px var(--body);color:var(--muted)}
+.pcard.conv{border-top:4px solid var(--down)} .pcard.fha{border-top:4px solid var(--own)}
+.fact small{display:block;font-size:13px;color:var(--muted);font-weight:500;text-align:right}
+.fact.key span:last-child{color:var(--own-text);font-size:1.08em}
+.note-list{display:flex;flex-direction:column;gap:8px;margin:0;padding-left:20px;font-size:16px;color:var(--muted)}
+.note-list b{color:var(--ink)}
+td.na{color:var(--muted);font-size:14px;font-weight:500;background:color-mix(in srgb,var(--flat) 10%,transparent)}
+td.capc{background:color-mix(in srgb,var(--own) 12%,transparent)}
+td .cashv{font-weight:800;color:var(--own-text)}
+td.na small{display:none}
+.mini{display:grid;gap:8px;grid-template-columns:repeat(2,minmax(0,1fr))}
+th small{display:block;margin-top:2px}
+@media (max-width:520px){.brand{display:none}.count{margin-left:auto}}
+.mini .rung{padding:12px 14px}
+.mini .rung .p{font-size:clamp(22px,2.4vw,28px)}
+.grp{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--own-text);grid-column:1/-1;margin-top:6px}
+</style>
+
+<header class="bar">
+  <div class="bar-in">
+    <strong class="brand">Michael and Alexis's Home Plan</strong>
+    <span class="showing">Numbers shown for</span>
+    <div class="seg" role="group" aria-label="Loan program shown in the charts">
+      <button type="button" data-prog="conv" aria-pressed="true">Conventional</button>
+      <button type="button" data-prog="fha" aria-pressed="false">FHA</button>
+    </div>
+    <span class="count" id="count">1 / 12</span>
+    <button class="btn" id="dealBtn" type="button" aria-expanded="false" aria-controls="drawer">Deal numbers</button>
+  </div>
+</header>
+
+<aside class="drawer" id="drawer" hidden aria-label="Deal numbers">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+    <h3>Deal numbers</h3>
+    <button class="btn ghost" id="closeBtn" type="button">Close</button>
+  </div>
+  <p class="small">Starting values come from the two loan scenarios for Michael and Alexis. Change any value and every slide updates. Edits stay in this browser.</p>
+  <div class="fields">
+    <p class="grp">The home and the market</p>
+    <div class="field wide"><label for="f-price">Purchase price</label><div class="inp"><span>$</span><input id="f-price" data-k="price" type="number" inputmode="decimal" step="1000" min="0"></div></div>
+    <div class="field"><label for="f-rent">Rent today</label><div class="inp"><span>$</span><input id="f-rent" data-k="rent" type="number" inputmode="decimal" step="25" min="0"></div></div>
+    <div class="field"><label for="f-conc">Seller concession</label><div class="inp"><input id="f-conc" data-k="conc" type="number" inputmode="decimal" step="0.5" min="0" max="6"><span>%</span></div></div>
+    <div class="field"><label for="f-tax">Property tax / mo</label><div class="inp"><span>$</span><input id="f-tax" data-k="tax" type="number" inputmode="decimal" step="5" min="0"></div></div>
+    <div class="field"><label for="f-ins">Insurance / mo</label><div class="inp"><span>$</span><input id="f-ins" data-k="ins" type="number" inputmode="decimal" step="5" min="0"></div></div>
+    <div class="field"><label for="f-hoa">HOA / mo</label><div class="inp"><span>$</span><input id="f-hoa" data-k="hoa" type="number" inputmode="decimal" step="5" min="0"></div></div>
+    <div class="field"><label for="f-rentG">Rent growth / yr</label><div class="inp"><input id="f-rentG" data-k="rentG" type="number" inputmode="decimal" step="0.5" min="0" max="15"><span>%</span></div></div>
+    <div class="field"><label for="f-apprG">Appreciation / yr</label><div class="inp"><input id="f-apprG" data-k="apprG" type="number" inputmode="decimal" step="0.5" min="0" max="15"><span>%</span></div></div>
+    <div class="field wide"><label for="f-escG">Tax, insurance, HOA growth / yr</label><div class="inp"><input id="f-escG" data-k="escG" type="number" inputmode="decimal" step="0.5" min="0" max="15"><span>%</span></div></div>
+    <p class="grp">Conventional</p>
+    <div class="field"><label for="f-cDown">Down payment</label><div class="inp"><input id="f-cDown" data-k="cDown" type="number" inputmode="decimal" step="0.5" min="0" max="100"><span>%</span></div></div>
+    <div class="field"><label for="f-cRate">Note rate</label><div class="inp"><input id="f-cRate" data-k="cRate" type="number" inputmode="decimal" step="0.125" min="0" max="20"><span>%</span></div></div>
+    <div class="field"><label for="f-cClosing">Total closing costs</label><div class="inp"><span>$</span><input id="f-cClosing" data-k="cClosing" type="number" inputmode="decimal" step="100" min="0"></div></div>
+    <div class="field"><label for="f-cMi">Mortgage insurance / mo</label><div class="inp"><span>$</span><input id="f-cMi" data-k="cMi" type="number" inputmode="decimal" step="1" min="0"></div></div>
+    <p class="grp">FHA</p>
+    <div class="field"><label for="f-fDown">Down payment</label><div class="inp"><input id="f-fDown" data-k="fDown" type="number" inputmode="decimal" step="0.5" min="0" max="100"><span>%</span></div></div>
+    <div class="field"><label for="f-fRate">Note rate</label><div class="inp"><input id="f-fRate" data-k="fRate" type="number" inputmode="decimal" step="0.125" min="0" max="20"><span>%</span></div></div>
+    <div class="field"><label for="f-fClosing">Total closing costs</label><div class="inp"><span>$</span><input id="f-fClosing" data-k="fClosing" type="number" inputmode="decimal" step="100" min="0"></div></div>
+    <div class="field"><label for="f-fMi">Mortgage insurance / mo</label><div class="inp"><span>$</span><input id="f-fMi" data-k="fMi" type="number" inputmode="decimal" step="1" min="0"></div></div>
+    <div class="field wide"><label for="f-fUf">Upfront mortgage insurance (financed)</label><div class="inp"><input id="f-fUf" data-k="fUf" type="number" inputmode="decimal" step="0.05" min="0" max="5"><span>%</span></div></div>
+  </div>
+  <div class="sum" id="drawerSum"></div>
+  <div class="row-btns"><button class="btn ghost" id="resetBtn" type="button">Reset to scenario numbers</button></div>
+</aside>
+
+<main>
+
+<section class="slide cover" id="s1">
+  <div class="wrap">
+    <p class="eyebrow">Michael and Alexis</p>
+    <h1>Let's map out your first home <span>together</span></h1>
+    <p class="lead">A plain-English walk through what owning does for you, what is going on with interest rates, and how we plan to get your payment where you want it.</p>
+    <div class="chips" aria-label="What we will cover">
+      <span class="chip">Owning vs renting</span><span class="chip">Home values</span><span class="chip">Your timeline</span><span class="chip">How rates work</span><span class="chip">Seller concessions</span><span class="chip">Your options</span><span class="chip">Your loan</span>
+    </div>
+    <div class="meta"><span>Prepared by Drake and Ricky Khamis</span><span>The Khamis Team · EPiQ Lending</span><span>October 10, 2026</span></div>
+  </div>
+</section>
+
+<section class="slide alt" id="s2">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Owning versus renting</p>
+      <h2 data-bh="extraHead"></h2>
+    </div>
+    <div class="grid">
+      <div class="card" style="border-top:4px solid var(--rent)">
+        <p class="tag rent-t">Rent today</p>
+        <p class="big" data-b="rent"></p>
+        <p>per month. After a year you have paid <b class="num" style="color:var(--ink)" data-b="y1Rent"></b> and own none of it.</p>
+      </div>
+      <div class="card" style="border-top:4px solid var(--own)">
+        <p class="tag own-t">Owning, all in</p>
+        <p class="big" data-b="pay1"></p>
+        <p data-bh="payNote"></p>
+      </div>
+    </div>
+    <div class="head"><h3>What the extra money gets you</h3></div>
+    <div class="grid" id="benefits"></div>
+    <p class="statement" data-bh="y1Statement"></p>
+    <p class="foot" data-bh="assump"></p>
+  </div>
+</section>
+
+<section class="slide" id="s3">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Home values</p>
+      <h2>Over the long run, U.S. home values have mostly gone up</h2>
+    </div>
+    <div class="card shot"><img src="appreciation.png" alt="Table of annual U.S. home price change by year from 1942 to 2023 from the Case-Shiller Home Price Index. Nearly every year is a gain, with declines only in 1990 and 2007 through 2011." width="1448" height="1086"></div>
+    <div class="grid" id="histStats"></div>
+    <p class="foot">Data: Case-Shiller Home Price Index, annual nominal change in U.S. home prices, 2023 estimated. Counts above are our tally of the table. Past results do not predict future results.</p>
+  </div>
+</section>
+
+<section class="slide alt" id="s4">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Your home, year by year</p>
+      <h2>Your payment holds steady while rent keeps rising</h2>
+      <p class="lead" data-bh="crossLead"></p>
+    </div>
+    <div class="chart-row">
+      <div class="card chart">
+        <div class="legend" id="crossLegend"></div>
+        <div class="chart-scroll"><div class="chart-wrap" id="w-cross"><svg id="svg-cross" role="img" aria-label="Line chart of monthly rent compared with the monthly cost of owning over time"></svg><div class="tip" hidden></div></div></div>
+      </div>
+      <div class="side" id="crossSide"></div>
+    </div>
+    <p class="foot" data-b="assumpCross"></p>
+  </div>
+</section>
+
+<section class="slide" id="s5">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Your financial picture</p>
+      <h2 data-bh="eqHead"></h2>
+      <p class="lead">Each bar is what you would own at the end of that year: your down payment, the loan you have paid off, and the growth in the home's value.</p>
+    </div>
+    <div class="chart-row">
+      <div class="card chart">
+        <div class="legend"><span><i style="background:var(--apprec)"></i>Appreciation</span><span><i style="background:var(--own)"></i>Principal paid down</span><span><i style="background:var(--down)"></i>Your down payment</span></div>
+        <div class="chart-scroll"><div class="chart-wrap" id="w-eq"><svg id="svg-eq" role="img" aria-label="Stacked bar chart of home equity by year"></svg><div class="tip" hidden></div></div></div>
+      </div>
+      <div class="side" id="eqSide"></div>
+    </div>
+    <p class="statement" data-bh="eqStatement"></p>
+    <p class="foot" data-b="assumpEq"></p>
+  </div>
+</section>
+
+<section class="slide band" id="s6">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">How interest rates work</p>
+      <h2>What sets your interest rate?</h2>
+      <p class="lead">Think of it as three layers stacked on top of each other.</p>
+    </div>
+    <div class="eq-row">
+      <div class="layer"><h3>The safe baseline</h3><p>The 10-year Treasury rate. It is what the U.S. government pays to borrow money. Lending to the government is about the safest loan there is, so it is the starting line.</p></div>
+      <span class="op" aria-hidden="true">+</span>
+      <div class="layer"><h3>The gap</h3><p>Called the spread. A home loan is riskier and more work than lending to the government, so investors ask for extra. Normally about 1.5 to 2 points.</p></div>
+      <span class="op" aria-hidden="true">+</span>
+      <div class="layer"><h3>Your details</h3><p>Your down payment, your credit, and any points you pay nudge your rate up or down.</p></div>
+      <span class="op" aria-hidden="true">=</span>
+      <div class="layer res"><h3 data-b="rateBig"></h3><p>Your rate on today's quote. Not to scale.</p></div>
+    </div>
+    <div class="grid">
+      <div class="card"><h3>Who sets the baseline?</h3><p>Nobody does alone. Investors buy and sell Treasuries every day. If they expect prices to rise fast or the economy to run hot, they ask for more and the rate goes up. If they get nervous and want safety, it drops. The Federal Reserve and how much the government borrows nudge it too.</p></div>
+      <div class="card"><h3>Why is there a gap?</h3><p>Imagine lending a friend $10. If your friend always pays on time, you ask for a tiny thank-you. If they might pay you back early, forget, or need someone to keep track of it, you ask for more. Lenders face the same three things.</p></div>
+      <div class="card"><h3>What is in the gap?</h3><p><b>Early payoff:</b> you can pay off or refinance anytime, so when rates fall the investor gets money back at the worst time. <b>Missed payments:</b> an insurance fee of about 0.4 points covers that. <b>Work:</b> someone has to create, package and manage the loan. When markets are jumpy, the cushion grows.</p></div>
+    </div>
+    <p class="lead">We can't control the baseline or the gap. What we can control is how much of your payment you carry in the first years.</p>
+    <p class="foot">Sources: <a href="https://www.bostonfed.org/publications/current-policy-perspectives/2026/why-mortgage-rates-exceed-treasury-yields.aspx" target="_blank" rel="noopener">Federal Reserve Bank of Boston, May 2026</a>, which puts the gap at roughly 1 to 3 points since 2000; <a href="https://www.nationalmortgagenews.com/news/mortgage-treasury-spread-at-narrowest-point-in-three-years" target="_blank" rel="noopener">National Mortgage News</a>, which describes a normal gap of 1.5 to 2 points.</p>
+  </div>
+</section>
+
+<section class="slide alt" id="s7">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">What high rates do to the market</p>
+      <h2>Higher rates mean fewer buyers. Fewer buyers mean flexible sellers.</h2>
+    </div>
+    <div class="flow">
+      <div class="st">Rates go up</div><span class="ar" aria-hidden="true">→</span>
+      <div class="st">Payments rise, so fewer people can buy</div><span class="ar" aria-hidden="true">→</span>
+      <div class="st">Homes sit longer and sellers compete for buyers</div><span class="ar" aria-hidden="true">→</span>
+      <div class="st">Sellers offer credits to get the deal done</div>
+    </div>
+    <div class="grid">
+      <div class="card"><p class="tag own-t">Across the U.S.</p><p class="big">44.7%</p><p>of home sales in August 2026 included a seller concession, the highest August share since at least 2020.</p><div class="bars"><div class="bar-track"><div class="bar-fill" style="width:44.7%"></div></div></div></div>
+      <div class="card"><p class="tag own-t">In Phoenix</p><p class="big">67.4%</p><p>of Phoenix sales in August 2026 included a seller concession, one of the highest shares among the metros Redfin tracks.</p><div class="bars"><div class="bar-track"><div class="bar-fill" style="width:67.4%"></div></div></div></div>
+      <div class="card"><p class="tag">What the money can do</p><p class="big" style="font-size:clamp(28px,3.4vw,40px)">Three jobs</p><p>Seller credits can pay your closing costs, cover repairs, or buy your interest rate down for a while.</p></div>
+    </div>
+    <p class="foot">Source: <a href="https://www.inman.com/2026/09/18/buyers-market-2026-seller-concessions/" target="_blank" rel="noopener">Redfin analysis reported by Inman, September 18, 2026</a>, and the <a href="https://www.placera.se/pressmeddelanden/nearly-half-of-homebuyers-get-concessions-from-sellers-as-most-markets-tip-in-buyers-favor-20260918" target="_blank" rel="noopener">Redfin press release of the same date</a>.</p>
+  </div>
+</section>
+
+
+<section class="slide" id="s8">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Your options</p>
+      <h2>Two loans that can work for you</h2>
+      <p class="lead" data-bh="optLead"></p>
+    </div>
+    <div class="pgrid" id="optCards"></div>
+    <div class="card">
+      <h3>Worth knowing about each</h3>
+      <div class="pgrid" id="optNotes"></div>
+    </div>
+    <p class="statement" data-bh="optStatement"></p>
+    <p class="foot">Both quotes are from your loan scenarios and are illustrative. Your actual rate, payment, and costs could be higher. Get an official Loan Estimate before choosing a loan.</p>
+  </div>
+</section>
+
+<section class="slide alt" id="s9">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Your cash to close</p>
+      <h2>What seller concessions do to your cash to close</h2>
+      <p class="lead" data-bh="cashLead"></p>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Seller concession</th><th data-bh="thConv"></th><th data-bh="thFha"></th></tr></thead>
+        <tbody id="cashBody"></tbody>
+      </table>
+    </div>
+    <p class="statement" data-bh="cashStatement"></p>
+    <p class="foot" data-bh="cashFoot"></p>
+  </div>
+</section>
+
+<section class="slide band" id="s10">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Using concessions well</p>
+      <h2>Recent deals have closed with up to 6% in seller concessions</h2>
+      <p class="lead">In this market, a concession can be worth more to you than a lower price. Here is how we think about it.</p>
+    </div>
+    <div class="grid">
+      <div class="card"><h3>Ask for credits, not only a lower price</h3><p>A price cut trims your payment a little, forever. A credit pays your costs up front and can lower your payment in the first years, when a high rate hurts most.</p></div>
+      <div class="card"><h3>Price and credits can work together</h3><p>Sometimes a slightly higher price with a bigger credit nets out better for the buyer, as long as the home still appraises at the contract price.</p></div>
+      <div class="card"><h3>Your agent leads the offer</h3><p>Your agent writes and negotiates the offer. Our job is to run the numbers quickly so you both know what a credit is worth, and to confirm it fits your loan.</p></div>
+    </div>
+    <div class="card" id="compareBox"></div>
+    <p class="foot" data-b="stratFoot"></p>
+  </div>
+</section>
+
+<section class="slide" id="s11">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Your loan</p>
+      <h2>Your loan, modeled against seller concessions</h2>
+      <p class="lead">Slide to see what a concession does under each loan. Each loan stops at the most it allows.</p>
+    </div>
+    <div class="card ctl">
+      <label for="concRange" id="concLabel"></label>
+      <input id="concRange" type="range" min="0" max="6" step="0.5">
+      <div class="scale"><span>0%</span><span>1.5%</span><span>3%</span><span>4.5%</span><span>6%</span></div>
+      <p class="notice" id="concNotice" hidden></p>
+    </div>
+    <div class="pgrid" id="loanCols"></div>
+    <p class="statement" data-bh="loanStatement"></p>
+    <p class="foot" data-bh="loanFoot"></p>
+  </div>
+</section>
+
+<section class="slide alt" id="s12">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Next steps</p>
+      <h2>Where we go from here</h2>
+    </div>
+    <div class="chart-row" style="grid-template-columns:minmax(0,1fr) minmax(280px,560px)">
+      <div class="step-list">
+        <div><h3>Your official Loan Estimate</h3><p class="lead">Real numbers on payment, cash to close, and seller concessions.</p></div>
+        <div><h3>Choose your path</h3><p class="lead">Conventional or FHA, side by side, with the buydown options that fit each.</p></div>
+        <div><h3>Shop with a plan</h3><p class="lead">When you find a home you love, your agent and our team are ready to build a strong offer.</p></div>
+        <div><h3>You set the pace</h3><p class="lead">No pressure and no obligation while you decide.</p></div>
+      </div>
+      <div class="people">
+        <div class="person"><p class="m" style="letter-spacing:.12em;text-transform:uppercase;font-weight:700">Your team</p><h3>Ricky Khamis</h3><p class="m">The Khamis Team · EPiQ Lending</p><p>(602) 758-7425</p><p>ricky.khamis@epiqlending.com</p><p class="m">NMLS ID# 173141</p></div>
+        <div class="person"><p class="m" style="letter-spacing:.12em;text-transform:uppercase;font-weight:700">Your team</p><h3>Drake Khamis</h3><p class="m">The Khamis Team · EPiQ Lending</p><p>(480) 383-6812</p><p>drake.khamis@epiqlending.com</p><p class="m">NMLS# 2450364</p></div>
+      </div>
+    </div>
+    <p class="foot">EPiQ Lending · 7975 N Hayden Rd, Ste A101, Scottsdale, AZ 85258 · Branch NMLS# 1936984. Illustrative only. Your actual rate, payment, and costs could be higher. Get an official Loan Estimate before choosing a loan. Not a commitment to lend. Home values and rents can rise or fall. Equal Housing Opportunity.</p>
+  </div>
+</section>
+
+</main>
+
+<script>
+(function(){
+  var DEF={price:389000,rent:2115,tax:125,ins:115,hoa:100,conc:6,rentG:4,apprG:4,escG:3,
+    cDown:3,cRate:7.25,cClosing:14249.25,cMi:91.19,cApr:7.7,cPts:3773.30,
+    fDown:3.5,fRate:6.5,fClosing:14265.96,fMi:171.30,fUf:1.75,fApr:7.43,fPts:3819.54};
+  var P=Object.assign({},DEF);
+  try{var sv=JSON.parse(localStorage.getItem('mhp-deal3')||'null');if(sv)for(var k in DEF)if(typeof sv[k]==='number'&&isFinite(sv[k]))P[k]=sv[k];}catch(e){}
+
+
+  var HIST={1942:3,1943:11,1944:17,1945:12,1946:24,1947:21,1948:2,1949:0,1950:4,1951:6,1952:4,1953:12,1954:1,1955:0,1956:1,1957:3,1958:1,1959:0,1960:1,1961:1,1962:0,1963:2,1964:1,1965:2,1966:1,1967:2,1968:4,1969:7,1970:8,1971:4,1972:3,1973:3,1974:10,1975:7,1976:8,1977:15,1978:16,1979:14,1980:7,1981:5,1982:1,1983:5,1984:5,1985:7,1986:10,1987:8,1988:7,1989:4,1990:-1,1991:0,1992:1,1993:2,1994:3,1995:2,1996:2,1997:4,1998:6,1999:8,2000:9,2001:7,2002:10,2003:10,2004:14,2005:14,2006:2,2007:-5,2008:-12,2009:-4,2010:-4,2011:-4,2012:6,2013:11,2014:5,2015:5,2016:5,2017:6,2018:5,2019:4,2020:10,2021:19,2022:6};
+
+  function $(s,r){return (r||document).querySelector(s);}
+  function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+  function money(n){var s=Math.round(Math.abs(n)).toLocaleString('en-US');return (n<0?'-':'')+'$'+s;}
+  function pct(n){return (Math.round(n*100)/100)+'%';}
+  function kfmt(v){var a=Math.abs(v);if(a>=1e6)return '$'+(+(v/1e6).toFixed(2))+'M';if(a>=1000)return '$'+(+(v/1000).toFixed(1))+'k';return '$'+Math.round(v);}
+  function niceStep(range,count){var raw=range/count,mag=Math.pow(10,Math.floor(Math.log10(raw))),f=raw/mag;return (f<=1?1:f<=2?2:f<=2.5?2.5:f<=5?5:10)*mag;}
+  function piFor(loan,rate){var r=rate/1200;return r>0?loan*r/(1-Math.pow(1+r,-360)):loan/360;}
+
+
+  var PROG={conv:{key:'conv',pre:'c',name:'Conventional',cap:3,miDrops:true},fha:{key:'fha',pre:'f',name:'FHA',cap:6,miDrops:false}};
+  var prog='conv';
+  try{var sp=localStorage.getItem('mhp-prog3');if(sp==='fha'||sp==='conv')prog=sp;}catch(e){}
+
+  function calcProg(key){
+    var g=PROG[key],pre=g.pre,downPct=P[pre+'Down'],rate=P[pre+'Rate'],closing=P[pre+'Closing'],mi=P[pre+'Mi'];
+    var base=P.price*(1-downPct/100),dn=P.price-base,uf=key==='fha'?base*P.fUf/100:0,fin=Math.round(uf),loan=base+fin,pi=piFor(loan,rate);
+    var opts=[{name:'3-2-1',drops:[3,2,1]},{name:'2-1',drops:[2,1]},{name:'1-0',drops:[1]}];
+    opts.forEach(function(o){o.pays=o.drops.map(function(d){return piFor(loan,Math.max(0,rate-d));});o.cost=o.pays.reduce(function(s,x){return s+(pi-x)*12;},0);});
+    function scen(c){
+      if(c>g.cap+1e-9)return {pct:c,over:true};
+      var credit=P.price*c/100,applied=Math.min(credit,closing),left=credit-applied,bd=null;
+      for(var i=0;i<opts.length;i++){if(opts[i].cost<=left+0.5){bd=opts[i];break;}}
+      return {pct:c,over:false,credit:credit,applied:applied,left:left,bd:bd,owed:closing-applied,unused:left-(bd?bd.cost:0),cash:dn+closing+(uf-fin)-applied};
+    }
+    var eff=Math.min(P.conc,g.cap),S=scen(eff);
+    var bal=loan,cp=0,cumR=0,cumO=0,rows=[],esc0=P.tax+P.ins+P.hoa+mi;
+    for(var y=1;y<=30;y++){
+      var start=bal,r=rate/1200;
+      for(var m=0;m<12;m++){var i2=bal*r,pr=pi-i2;bal-=pr;cp+=pr;}
+      var rent=P.rent*Math.pow(1+P.rentG/100,y-1);
+      var esc=(P.tax+P.ins+P.hoa)*Math.pow(1+P.escG/100,y-1);
+      var miy=g.miDrops?(start>0.8*P.price?mi:0):mi;
+      var pay=pi+esc+miy;
+      var payBD=(S.bd&&y<=S.bd.pays.length)?pay-(pi-S.bd.pays[y-1]):pay;
+      cumR+=rent*12;cumO+=pay*12;
+      var value=P.price*Math.pow(1+P.apprG/100,y),b=Math.max(0,bal);
+      rows.push({y:y,rent:rent,pay:pay,payBD:payBD,bal:b,value:value,equity:value-b,principal:cp,apprec:value-P.price,cumR:cumR,cumO:cumO,mi:miy});
+    }
+    var cross=null;for(var j=0;j<rows.length;j++){if(rows[j].rent>=rows[j].pay){cross=rows[j].y;break;}}
+    return {key:key,g:g,rate:rate,closing:closing,mi:mi,downPct:downPct,down:dn,base:base,uf:uf,fin:fin,loan:loan,pi:pi,esc0:esc0,rows:rows,cross:cross,opts:opts,S:S,eff:eff,scen:scen};
+  }
+  var M,MM;
+  function R(y){return M.rows[y-1];}
+  function chartN(){return M.cross?Math.min(30,Math.max(12,M.cross+4)):30;}
+
+  function setText(map,htmlMap){
+    $$('[data-b]').forEach(function(el){var k=el.getAttribute('data-b');if(map[k]!=null)el.textContent=map[k];});
+    $$('[data-bh]').forEach(function(el){var k=el.getAttribute('data-bh');if(htmlMap[k]!=null)el.innerHTML=htmlMap[k];});
+  }
+
+  function attachHover(wrapId,svgId,n,xOf,content){
+    var wrap=document.getElementById(wrapId),svg=document.getElementById(svgId),tip=$('.tip',wrap),vb=svg.viewBox.baseVal;
+    var line=svg.querySelector('.hov');
+    function idxFrom(e){var rc=svg.getBoundingClientRect(),vx=(e.clientX-rc.left)/rc.width*vb.width;var best=1,bd=1e9;for(var i=1;i<=n;i++){var d=Math.abs(xOf(i)-vx);if(d<bd){bd=d;best=i;}}return {i:best,rc:rc};}
+    function show(e){var o=idxFrom(e),i=o.i,x=xOf(i);if(line){line.setAttribute('x1',x);line.setAttribute('x2',x);line.style.display='';}
+      tip.innerHTML=content(i);tip.hidden=false;var px=x/vb.width*o.rc.width;var tw=tip.offsetWidth;var left=px+14;if(left+tw>wrap.clientWidth-4)left=px-tw-14;tip.style.left=Math.max(4,left)+'px';}
+    function hide(){tip.hidden=true;if(line)line.style.display='none';}
+    svg.onpointermove=show;svg.onpointerdown=show;svg.onpointerleave=hide;
+  }
+
+  function drawCross(){
+    var n=chartN(),VW=820,VH=430,L=64,Rr=VW-150,T=40,B=VH-44,W=Rr-L,H=B-T,bd=M.S.bd;
+    var rows=M.rows.slice(0,n),lo=1e9,hi=0;
+    rows.forEach(function(r){lo=Math.min(lo,r.rent,r.pay,bd?r.payBD:1e9);hi=Math.max(hi,r.rent,r.pay);});
+    var step=niceStep((hi-lo)*1.25,5);var yl=Math.floor(lo*0.94/step)*step,yh=Math.ceil(hi*1.04/step)*step;
+    function X(y){return L+(y-1)/(n-1)*W;} function Y(v){return B-(v-yl)/(yh-yl)*H;}
+    var s='';
+    for(var v=yl;v<=yh+1e-6;v+=step){var yy=Y(v);s+='<line class="grid-l" x1="'+L+'" x2="'+Rr+'" y1="'+yy+'" y2="'+yy+'"/><text class="tick" x="'+(L-10)+'" y="'+(yy+4)+'" text-anchor="end">'+kfmt(v)+'</text>';}
+    s+='<line class="axis-l" x1="'+L+'" x2="'+Rr+'" y1="'+B+'" y2="'+B+'"/>';
+    var xt=[1,5,10,15,20,25,30].filter(function(y){return y<=n;});if(xt.indexOf(n)<0&&n-xt[xt.length-1]>2)xt.push(n);
+    xt.forEach(function(y){s+='<text class="tick" x="'+X(y)+'" y="'+(B+24)+'" text-anchor="middle">Year '+y+'</text>';});
+    function path(key){return rows.map(function(r,i){return (i?'L':'M')+X(r.y).toFixed(1)+','+Y(r[key]).toFixed(1);}).join(' ');}
+    if(M.cross&&M.cross>1){var a=R(M.cross-1),b=R(M.cross),da=a.pay-a.rent,db=b.pay-b.rent,t=da/(da-db),xc=X(M.cross-1+t);
+      s+='<line x1="'+xc+'" x2="'+xc+'" y1="'+(T-6)+'" y2="'+B+'" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="6 6"/>';
+      var tx=Math.min(Math.max(xc,170),VW-170);s+='<text class="ann" x="'+tx+'" y="'+(T-16)+'" text-anchor="middle">Year '+M.cross+': rent passes the cost of owning</text>';}
+    if(bd)s+='<path d="'+path('payBD')+'" fill="none" stroke="var(--own)" stroke-width="3" stroke-dasharray="8 7" stroke-linecap="round"/>';
+    s+='<path d="'+path('pay')+'" fill="none" stroke="var(--own)" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>';
+    s+='<path d="'+path('rent')+'" fill="none" stroke="var(--rent)" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>';
+    var last=rows[n-1],y1=Y(last.rent),y2=Y(last.pay);
+    s+='<circle cx="'+X(n)+'" cy="'+y1+'" r="6" fill="var(--rent)" stroke="var(--card)" stroke-width="2"/><circle cx="'+X(n)+'" cy="'+y2+'" r="6" fill="var(--own)" stroke="var(--card)" stroke-width="2"/>';
+    var ly1=y1+5,ly2=y2+5;if(Math.abs(ly1-ly2)<20){if(y1<y2){ly1-=10;ly2+=10;}else{ly1+=10;ly2-=10;}}
+    s+='<text class="lbl" x="'+(X(n)+14)+'" y="'+ly1+'">Rent '+money(last.rent)+'</text><text class="lbl" x="'+(X(n)+14)+'" y="'+ly2+'">Own '+money(last.pay)+'</text>';
+    s+='<line class="hov" y1="'+T+'" y2="'+B+'" stroke="var(--flat)" stroke-width="1.5" style="display:none"/>';
+    s+='<rect x="'+L+'" y="'+T+'" width="'+W+'" height="'+H+'" fill="transparent"/>';
+    var svg=$('#svg-cross');svg.setAttribute('viewBox','0 0 '+VW+' '+VH);svg.innerHTML=s;
+    attachHover('w-cross','svg-cross',n,X,function(i){var r=R(i);return '<b>Year '+i+'</b><br>Rent '+money(r.rent)+' / mo<br>Owning '+money(r.pay)+' / mo'+(bd&&i<=bd.pays.length?'<br>With buydown '+money(r.payBD)+' / mo':'');});
+  }
+
+  function drawEq(){
+    var n=chartN(),VW=820,VH=430,L=64,Rr=VW-16,T=44,B=VH-44,W=Rr-L,H=B-T;
+    var rows=M.rows.slice(0,n),hi=0;rows.forEach(function(r){hi=Math.max(hi,M.down+r.principal+Math.max(0,r.apprec));});
+    var step=niceStep(hi*1.08,5),yh=Math.ceil(hi*1.04/step)*step;
+    function Y(v){return B-v/yh*H;} var slot=W/n,bw=Math.min(44,slot*0.72);
+    function X(i){return L+slot*(i-0.5);}
+    var s='';
+    for(var v=0;v<=yh+1e-6;v+=step){var yy=Y(v);s+='<line class="'+(v===0?'axis-l':'grid-l')+'" x1="'+L+'" x2="'+Rr+'" y1="'+yy+'" y2="'+yy+'"/><text class="tick" x="'+(L-10)+'" y="'+(yy+4)+'" text-anchor="end">'+kfmt(v)+'</text>';}
+    var every=n>16?(n>24?5:2):1;
+    rows.forEach(function(r){
+      var x=X(r.y)-bw/2,d=M.down,p=r.principal,a=Math.max(0,r.apprec);
+      var y0=Y(0),y1=Y(d),y2=Y(d+p),y3=Y(d+p+a);
+      s+='<rect x="'+x+'" y="'+y1+'" width="'+bw+'" height="'+(y0-y1)+'" fill="var(--down)" stroke="var(--card)" stroke-width="1.5"/>';
+      s+='<rect x="'+x+'" y="'+y2+'" width="'+bw+'" height="'+Math.max(0,y1-y2)+'" fill="var(--own)" stroke="var(--card)" stroke-width="1.5"/>';
+      s+='<rect x="'+x+'" y="'+y3+'" width="'+bw+'" height="'+Math.max(0,y2-y3)+'" fill="var(--apprec)" stroke="var(--card)" stroke-width="1.5"/>';
+      if((r.y-1)%every===0||r.y===n)s+='<text class="tick" x="'+X(r.y)+'" y="'+(B+24)+'" text-anchor="middle">'+(n>16?r.y:'Yr '+r.y)+'</text>';
+    });
+    if(M.cross){var xc=X(M.cross);s+='<line x1="'+xc+'" x2="'+xc+'" y1="'+(T-4)+'" y2="'+Y(R(M.cross).equity)+'" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="6 6"/>';
+      var tx=Math.min(Math.max(xc,190),VW-190);s+='<text class="ann" x="'+tx+'" y="'+(T-14)+'" text-anchor="middle">Year '+M.cross+': rent passes the cost of owning</text>';}
+    s+='<line class="hov" y1="'+T+'" y2="'+B+'" stroke="var(--flat)" stroke-width="1.5" style="display:none"/>';
+    s+='<rect x="'+L+'" y="'+T+'" width="'+W+'" height="'+H+'" fill="transparent"/>';
+    var svg=$('#svg-eq');svg.setAttribute('viewBox','0 0 '+VW+' '+VH);svg.innerHTML=s;
+    attachHover('w-eq','svg-eq',n,X,function(i){var r=R(i);return '<b>Year '+i+': '+money(r.equity)+' equity</b><br>Down payment '+money(M.down)+'<br>Principal paid '+money(r.principal)+'<br>Appreciation '+money(r.apprec);});
+  }
+
+  function ptsNote(key){return key==='fha'?P.fPts:P.cPts;}
+
+  function render(){
+    MM={conv:calcProg('conv'),fha:calcProg('fha')};M=MM[prog];
+    var A=MM.conv,B=MM.fha,S=M.S,y1=R(1),n=chartN(),extra=y1.pay-P.rent,gain=y1.principal+y1.apprec,yearlyExtra=extra*12,esc0=M.esc0;
+    $$('[data-prog]').forEach(function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-prog')===prog));});
+    var miLine=M.g.miDrops?'Mortgage insurance of '+money(M.mi)+' a month is included until you owe 80% of the original price.':'FHA mortgage insurance of '+money(M.mi)+' a month is included for the life of the loan.';
+    var assump='Illustrative ('+M.g.name+'): '+money(P.price)+' price, '+pct(M.downPct)+' down, '+pct(M.rate)+' fixed rate, '+pct(P.apprG)+' yearly appreciation. Excludes maintenance and closing costs.';
+    var assump2='Illustrative ('+M.g.name+'): rent up '+pct(P.rentG)+' a year, taxes, insurance and HOA up '+pct(P.escG)+' a year, '+pct(M.rate)+' fixed rate. '+miLine+' Not a prediction. Each figure is the monthly amount during that year.'+(S.bd?' Dashed line: the first '+S.bd.pays.length+' years with the seller-funded '+S.bd.name+' buydown.':'');
+    var assump3='Illustrative ('+M.g.name+'): '+money(P.price)+' home, '+pct(M.downPct)+' down ('+money(M.down)+'), '+pct(P.apprG)+' yearly appreciation. Not a guarantee. Excludes maintenance, closing and selling costs.';
+    var cr=M.cross?R(M.cross):R(10),cy=M.cross||10;
+    var bdNote=S.bd?' Seller credits can narrow that to about '+money(R(1).payBD-P.rent)+' in year one. We show how on the loan slide.':'';
+    var map={rent:money(P.rent),y1Rent:money(y1.cumR),pay1:money(y1.pay),assumpCross:assump2,assumpEq:assump3,rateBig:pct(M.rate),
+      stratFoot:'Sellers decide what they will agree to, so no outcome is promised on any one offer. Concession limits depend on the loan program and the down payment, and the home must appraise at the contract price. We confirm what applies before you write an offer.'};
+    var cap1=A.g.cap,cap2=B.g.cap,a3=A.scen(cap1),b6=B.scen(cap2);
+    var html={
+      extraHead:extra>=0?'The extra <span class="own-t">'+money(extra)+'</span> a month buys you ownership':'Owning costs <span class="own-t">'+money(-extra)+'</span> less a month than renting',
+      payNote:money(M.pi)+' principal and interest plus '+money(esc0)+' for taxes, insurance, HOA and mortgage insurance. '+(extra>=0?'About '+money(extra)+' more than rent.':'Below today\'s rent.'),
+      y1Statement:'Year one adds about '+money(gain)+' to your net worth ('+money(y1.principal)+' of principal paid down and '+money(y1.apprec)+' of appreciation at '+pct(P.apprG)+'), against '+money(Math.max(0,yearlyExtra))+' of extra cost for the year.'+bdNote,
+      assump:assump,
+      crossLead:M.cross?('Principal and interest stays locked at '+money(M.pi)+'. Rent rises every year, and in this model it passes the cost of owning in year '+M.cross+'.'):('Principal and interest stays locked at '+money(M.pi)+'. Under these numbers rent does not pass the cost of owning within 30 years.'),
+      eqHead:M.cross?('When rent passes your payment in year '+cy+', you own '+money(cr.equity)):('After 10 years you own '+money(cr.equity)),
+      eqStatement:'By year '+cy+', renting would have cost '+money(cr.cumR)+' and left you with nothing. Owning would have cost '+money(cr.cumO)+' in payments and left you with '+money(cr.equity)+' of equity.',
+      optLead:'Same home, same price. The difference is how much you put down, the rate, the insurance, and how much the seller is allowed to help.',
+      thConv:'Conventional, '+pct(A.downPct)+' down<small style="text-transform:none;letter-spacing:0">seller help up to '+cap1+'%</small>',
+      thFha:'FHA, '+pct(B.downPct)+' down<small style="text-transform:none;letter-spacing:0">seller help up to '+cap2+'%</small>',
+      cashLead:'With no help from the seller, a conventional loan needs '+money(A.scen(0).cash)+' at closing and FHA needs '+money(B.scen(0).cash)+'. Here is how each changes as the seller helps more.',
+      cashStatement:'At each loan\'s limit, conventional brings your cash to close down to '+money(a3.cash)+(a3.owed>0.5?', with '+money(a3.owed)+' of closing costs still yours':'')+'. FHA brings it to '+money(b6.cash)+(b6.owed<=0.5?', which is just your down payment':'')+(b6.bd?', and still leaves enough to fund a '+b6.bd.name+' buydown':'')+'.',
+      cashFoot:'Seller credits can only pay closing costs and buy down your rate. They cannot be paid to you as cash, and your down payment is always yours to bring. A conventional loan with '+pct(A.downPct)+' down allows seller credits up to '+cap1+'% of the price. FHA allows up to '+cap2+'%. We confirm the limit for your exact loan, and the home must appraise at the contract price.',
+      loanFoot:'Illustrative. A temporary buydown lowers your payment for the first years, then the payment returns to the note rate unless you refinance. Mortgage insurance is included in every payment shown. Your actual rate, payment, and costs could be higher. Get an official Loan Estimate before choosing a loan.'
+    };
+
+    /* benefits */
+    $('#benefits').innerHTML=[
+      ['Principal paid down',money(y1.principal),'in year one, from the same payment you would make anyway'],
+      ['Appreciation',money(y1.apprec),'in year one at '+pct(P.apprG)+' a year. Not guaranteed'],
+      ['A fixed payment','Locked','principal and interest never changes. Rent usually does'],
+      ['Control','Yours','your home, your decisions, no lease renewal notice']
+    ].map(function(b){return '<div class="card"><p class="tag own-t">'+b[0]+'</p><p class="big" style="font-size:clamp(28px,3.4vw,42px)">'+b[1]+'</p><p>'+b[2]+'</p></div>';}).join('');
+
+    /* history stats */
+    var ys=Object.keys(HIST).map(Number),up=0,flat=0,down=0,sum=0;ys.forEach(function(yr){var v=HIST[yr];sum+=v;if(v>0)up++;else if(v<0)down++;else flat++;});
+    $('#histStats').innerHTML='<div class="card"><p class="tag own-t">Average yearly gain</p><p class="big">'+(Math.round(sum/ys.length*10)/10)+'%</p><p>across '+ys.length+' years, 1942 to 2022</p></div><div class="card"><p class="tag own-t">Years that went up</p><p class="big">'+up+' of '+ys.length+'</p><p>'+flat+' were flat</p></div><div class="card"><p class="tag rent-t">Years with a decline</p><p class="big">'+down+' of '+ys.length+'</p><p>1990 and 2007 to 2011</p></div>';
+
+    /* crossover side + legend */
+    $('#crossLegend').innerHTML='<span><i style="background:var(--rent)"></i>Monthly rent</span><span><i style="background:var(--own)"></i>Monthly cost of owning</span>'+(S.bd?'<span><i class="dash"></i>Owning with seller-funded '+S.bd.name+' buydown</span>':'');
+    $('#crossSide').innerHTML='<div><p class="k rent-t">Rent, up '+pct(P.rentG)+' a year</p><p class="v">'+money(y1.rent)+' → '+money(R(n).rent)+'</p><p>by year '+n+'</p></div><div><p class="k own-t">Owning, all in</p><p class="v">'+money(y1.pay)+' → '+money(R(n).pay)+'</p><p>Principal and interest is locked. Taxes, insurance and HOA can change'+(M.g.miDrops?', and mortgage insurance can drop off.':'.')+'</p></div>'+(M.cross?'<div><p class="k">The crossover</p><p class="v">Year '+M.cross+'</p><p>After this, renting costs more every month.</p></div>':'');
+
+    /* equity side */
+    $('#eqSide').innerHTML='<div><p class="k own-t">Equity in year '+cy+'</p><p class="v">'+money(cr.equity)+'</p><p>home value '+money(cr.value)+' minus loan balance '+money(cr.bal)+'</p></div><div><p class="k">Down payment</p><p class="v">'+money(M.down)+'</p><p>yours from day one</p></div><div><p class="k">Principal paid</p><p class="v">'+money(cr.principal)+'</p><p>by year '+cy+'</p></div><div><p class="k">Appreciation</p><p class="v">'+money(cr.apprec)+'</p><p>at '+pct(P.apprG)+' a year, not guaranteed</p></div>';
+
+    /* options */
+    function optCard(X,apr,pts){
+      var s=X.scen(X.g.cap),r10=X.rows[9];
+      var facts=[
+        ['Down payment',money(X.down),pct(X.downPct)],
+        ['Loan amount',money(X.loan),X.fin?'includes '+money(X.fin)+' upfront mortgage insurance':''],
+        ['Note rate',pct(X.rate),apr?'APR '+apr+'%':''],
+        ['Principal and interest',money(X.pi),''],
+        ['Taxes, insurance, HOA',money(P.tax+P.ins+P.hoa),''],
+        ['Mortgage insurance',money(X.mi)+' / mo',X.g.miDrops?'drops off near 80% of the price':'stays for the life of the loan'],
+        ['Total monthly payment',money(X.pi+X.esc0),'',1],
+        ['Closing costs',money(X.closing),pts?'includes '+money(pts)+' in points':''],
+        ['Cash to close, no seller help',money(X.scen(0).cash),'',1],
+        ['Most the seller can help with',X.g.cap+'% ('+money(P.price*X.g.cap/100)+')',''],
+        ['Cash to close at that limit',money(s.cash),s.owed>0.5?money(s.owed)+' of closing costs still yours':(s.bd?'closing costs covered, plus a '+s.bd.name+' buydown':'closing costs covered'),1],
+        ['Year-one payment at that limit',money(X.rows[0].payBD),(X.rows[0].payBD-P.rent>=0?money(X.rows[0].payBD-P.rent)+' above':money(P.rent-X.rows[0].payBD)+' below')+' your rent today',1],
+        ['Rent passes the cost of owning',X.cross?'Year '+X.cross:'Not in 30 years',''],
+        ['Equity after 10 years',money(r10.equity),'at '+pct(P.apprG)+' appreciation']
+      ];
+      return '<div class="pcard '+X.key+'"><h3>'+X.g.name+'<small>'+pct(X.downPct)+' down</small></h3><div class="facts" style="grid-template-columns:1fr">'+facts.map(function(f){return '<div class="fact'+(f[3]?' key':'')+'"><span>'+f[0]+'</span><span>'+f[1]+(f[2]?'<small>'+f[2]+'</small>':'')+'</span></div>';}).join('')+'</div></div>';
+    }
+    $('#optCards').innerHTML=optCard(A,P.cApr,P.cPts)+optCard(B,P.fApr,P.fPts);
+    var lower=B.pi+B.esc0<A.pi+A.esc0;
+    $('#optNotes').innerHTML=
+      '<div><p class="tag" style="color:var(--down)">Conventional</p><ul class="note-list"><li>Monthly mortgage insurance <b>falls away</b> once you owe about 80% of the original price.</li><li>Seller help is limited to <b>'+cap1+'%</b> at this down payment, so some closing costs stay with you.</li><li>No upfront mortgage insurance added to the loan.</li></ul></div>'+
+      '<div><p class="tag own-t">FHA</p><ul class="note-list"><li>'+(B.rate<A.rate?'A <b>lower rate</b> ('+pct(B.rate)+' versus '+pct(A.rate)+') on these quotes':'Rate of '+pct(B.rate))+(lower?' and a lower monthly payment':'')+'.</li><li>Seller help can go up to <b>'+cap2+'%</b>, enough to cover all closing costs'+(b6.bd?' and fund a '+b6.bd.name+' buydown':'')+'.</li><li>Mortgage insurance has two parts: an upfront amount ('+money(B.fin)+') rolled into the loan, and a monthly amount that <b>lasts the whole loan</b>. A later refinance can remove it once you have enough equity.</li></ul></div>';
+    html.optStatement='Neither one is better for everyone. It comes down to what matters most to you: cash at closing, the payment in the first years, or the payment over the long haul.';
+
+    /* cash table */
+    function cell(X,pc){
+      var s=X.scen(pc);
+      if(s.over)return '<td class="na">Over the '+X.g.cap+'% limit</td>';
+      var note=pc===0?'No help from the seller':(s.owed>0.5?money(s.owed)+' of closing costs still yours':(s.bd?'Closing costs covered, plus a '+s.bd.name+' buydown':'Closing costs covered'));
+      return '<td'+(pc===X.g.cap?' class="capc"':'')+'><span class="cashv">'+money(s.cash)+'</span><small>'+note+(pc===X.g.cap?' · the limit':'')+'</small></td>';
+    }
+    $('#cashBody').innerHTML=[0,1,2,3,4,5,6].map(function(pc){
+      return '<tr><td>'+(pc===0?'None':pct(pc)+'<small>'+money(P.price*pc/100)+'</small>')+'</td>'+cell(A,pc)+cell(B,pc)+'</tr>';
+    }).join('');
+
+    /* strategy compare */
+    var o=M.opts[1],cut=o.cost,dPI=cut*(M.loan/P.price)*M.pi/M.loan;
+    $('#compareBox').innerHTML='<h3>The same '+money(cut)+', two ways ('+M.g.name+')</h3><div class="grid"><div><p class="tag">Take it as a price cut</p><p class="big" style="font-size:clamp(30px,3.6vw,44px)">'+money(dPI)+' / mo</p><p>lower payment, for as long as you have the loan.</p></div><div><p class="tag own-t">Take it as a seller credit</p><p class="big" style="font-size:clamp(30px,3.6vw,44px)">'+money(M.pi-o.pays[0])+' then '+money(M.pi-o.pays[1])+'</p><p>off your payment in year 1 and year 2 (a 2-1 buydown). Then it returns to the note rate unless you refinance.</p></div></div><p>Both are worth about the same in total. The credit puts the savings in the first years, when a high rate hurts most, and the headline price stays where the seller wants it.</p>';
+
+    /* loan section */
+    var rng=$('#concRange');if(document.activeElement!==rng)rng.value=Math.min(6,P.conc);
+    $('#concLabel').innerHTML='Seller concession: <b>'+pct(P.conc)+'</b> of the price ('+money(P.price*P.conc/100)+')';
+    var nt=$('#concNotice');
+    if(P.conc>cap1){nt.hidden=false;nt.textContent='A conventional loan with '+pct(A.downPct)+' down allows seller credits up to '+cap1+'% of the price, so its column stops at '+cap1+'%. FHA goes up to '+cap2+'%.';}else nt.hidden=true;
+    function loanCol(X){
+      var s=X.S,capped=P.conc>X.g.cap;
+      var rungs=[1,2,3,4].map(function(y){var r=X.rows[y-1],pay=r.payBD,diff=pay-r.rent;
+        return '<div class="rung'+(s.bd&&y<=s.bd.pays.length?' best':'')+'"><span class="y">'+(y===4?'Year 4 on':'Year '+y)+'</span><span class="p">'+money(pay)+'</span><span class="d">Rent '+money(r.rent)+'</span><span class="d">'+(diff>=0?money(diff)+' above rent':money(-diff)+' below rent')+'</span></div>';}).join('');
+      var out='Pays <b>'+money(s.applied)+'</b> of your '+money(X.closing)+' in closing costs.'+(s.left>0.5?' Left for a rate buydown: <b>'+money(s.left)+'</b>'+(s.bd?', enough to fund a <b>'+s.bd.name+'</b> buydown (about '+money(s.bd.cost)+').':'; not enough for a full buydown.'):'')+(s.unused>1&&s.bd?' The other '+money(s.unused)+' cannot be taken as cash.':'');
+      return '<div class="pcard '+X.key+'"><h3>'+X.g.name+'<small>'+(capped?'limited to '+X.g.cap+'%':pct(X.eff)+' concession')+'</small></h3>'+
+        '<div class="facts" style="grid-template-columns:1fr"><div class="fact"><span>Loan amount</span><span>'+money(X.loan)+'</span></div><div class="fact"><span>Note rate</span><span>'+pct(X.rate)+'</span></div><div class="fact"><span>Total payment, no buydown</span><span>'+money(X.pi+X.esc0)+'</span></div><div class="fact key"><span>Your cash to close</span><span>'+money(s.cash)+'</span></div></div>'+
+        '<p style="color:var(--ink);font-size:16px">'+out+'</p><div class="mini">'+rungs+'</div></div>';
+    }
+    $('#loanCols').innerHTML=loanCol(A)+loanCol(B);
+    html.loanStatement='In year one, conventional costs about '+money(Math.abs(A.rows[0].payBD-P.rent))+(A.rows[0].payBD>=P.rent?' above':' below')+' your rent today and FHA about '+money(Math.abs(B.rows[0].payBD-P.rent))+(B.rows[0].payBD>=P.rent?' above':' below')+', with cash to close of '+money(A.S.cash)+' and '+money(B.S.cash)+'.';
+
+    setText(map,html);
+    drawCross();drawEq();
+
+    $('#drawerSum').innerHTML='<b>Conventional</b><br>Loan '+money(A.loan)+' · payment '+money(A.pi+A.esc0)+'<br>Cash to close at '+pct(A.eff)+': '+money(A.S.cash)+'<br><b>FHA</b><br>Loan '+money(B.loan)+' · payment '+money(B.pi+B.esc0)+'<br>Cash to close at '+pct(B.eff)+': '+money(B.S.cash);
+  }
+
+  /* inputs */
+  function sync(k){var f=document.getElementById('f-'+k);if(f&&document.activeElement!==f)f.value=P[k];}
+  function save(){try{localStorage.setItem('mhp-deal3',JSON.stringify(P));}catch(e){}}
+  $$('#drawer input[data-k]').forEach(function(inp){
+    var k=inp.getAttribute('data-k');inp.value=P[k];
+    inp.addEventListener('input',function(){var v=parseFloat(inp.value);if(isFinite(v)){P[k]=v;save();render();}});
+  });
+  $('#concRange').addEventListener('input',function(){P.conc=parseFloat(this.value);sync('conc');save();render();});
+  $$('[data-prog]').forEach(function(b){b.addEventListener('click',function(){prog=b.getAttribute('data-prog');try{localStorage.setItem('mhp-prog3',prog);}catch(e){}render();});});
+  $('#resetBtn').addEventListener('click',function(){P=Object.assign({},DEF);$$('#drawer input[data-k]').forEach(function(i){i.value=P[i.getAttribute('data-k')];});try{localStorage.removeItem('mhp-deal3');}catch(e){}render();});
+  var drawer=$('#drawer'),dealBtn=$('#dealBtn');
+  function toggleDrawer(open){drawer.hidden=!open;dealBtn.setAttribute('aria-expanded',String(open));}
+  dealBtn.addEventListener('click',function(){toggleDrawer(drawer.hidden);});
+  $('#closeBtn').addEventListener('click',function(){toggleDrawer(false);dealBtn.focus();});
+  if(location.hash==='#numbers')toggleDrawer(true);
+
+  /* slide navigation */
+  var slides=$$('.slide'),count=$('#count');
+  function current(){var best=0;for(var i=0;i<slides.length;i++){if(slides[i].getBoundingClientRect().top<=90)best=i;}return best;}
+  function go(i){i=Math.max(0,Math.min(slides.length-1,i));slides[i].scrollIntoView();}
+  function upd(){count.textContent=(current()+1)+' / '+slides.length;}
+  window.addEventListener('scroll',upd,{passive:true});
+  document.addEventListener('keydown',function(e){
+    var t=e.target&&e.target.tagName;if(t==='INPUT'||t==='TEXTAREA'||t==='SELECT')return;
+    if(e.key==='Escape'&&!drawer.hidden){toggleDrawer(false);return;}
+    if(e.metaKey||e.ctrlKey||e.altKey)return;
+    if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key==='PageDown'||e.key==='j'){e.preventDefault();go(current()+1);}
+    else if(e.key==='ArrowLeft'||e.key==='ArrowUp'||e.key==='PageUp'||e.key==='k'){e.preventDefault();go(current()-1);}
+    else if(e.key==='Home'){e.preventDefault();go(0);}
+    else if(e.key==='End'){e.preventDefault();go(slides.length-1);}
+  });
+
+  render();upd();
+})();
+</script>
